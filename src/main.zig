@@ -1,9 +1,16 @@
 const std = @import("std");
 
-pub fn main() anyerror!void {
-    std.log.info("All your codebase are belong to us.", .{});
-}
+const ArgumentParser = @import("argument_parser.zig").ArgumentParser;
 
-test "basic test" {
-    try std.testing.expectEqual(10, 3 + 7);
+pub fn main() anyerror!void {
+    // Allocator
+    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+    defer arena.deinit();
+    var allocator = arena.allocator();
+
+    // Get Arguments
+    var args = try ArgumentParser.parseArgumentsAllocator(allocator);
+
+    std.debug.print("shannon: {}\n", .{args.shannon});
+    std.debug.print("input: {s}\n", .{args.input});
 }
