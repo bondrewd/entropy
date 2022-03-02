@@ -26,18 +26,7 @@ pub fn shannonEntropyReader(reader: anytype) ShannonEntropy {
         byte_count += 1;
     }
 
-    // Calculate size in bytes
-    const size = @intToFloat(f32, byte_count);
-
-    // Calculate probabilities
-    var probabilities = [_]f32{0.0} ** 255;
-    for (probabilities) |*p, i| p.* = @intToFloat(f32, hist[i]) / size;
-
-    // Calculate entropy
-    var entropy: f32 = 0.0;
-    for (probabilities) |p| entropy -= if (p > 0.0) p * log2(p) else 0.0;
-
-    return .{ .symbol = entropy, .dataset = size * ceil(entropy) };
+    return shannonEntropyHistogram(hist);
 }
 
 pub fn shannonEntropyString(string: []const u8) ShannonEntropy {
@@ -51,16 +40,22 @@ pub fn shannonEntropyString(string: []const u8) ShannonEntropy {
         byte_count += 1;
     }
 
+    return shannonEntropyHistogram(hist);
+}
+
+fn shannonEntropyHistogram(hist: [255]u64) ShannonEntropy {
     // Calculate size in bytes
+    var byte_count: u64 = 0;
+    for (hist) |n| byte_count += n;
     const size = @intToFloat(f32, byte_count);
 
     // Calculate probabilities
-    var probabilities = [_]f32{0.0} ** 255;
-    for (probabilities) |*p, i| p.* = @intToFloat(f32, hist[i]) / size;
+    var probs = [_]f32{0.0} ** 255;
+    for (probs) |*p, i| p.* = @intToFloat(f32, hist[i]) / size;
 
     // Calculate entropy
     var entropy: f32 = 0.0;
-    for (probabilities) |p| entropy -= if (p > 0.0) p * log2(p) else 0.0;
+    for (probs) |p| entropy -= if (p > 0.0) p * log2(p) else 0.0;
 
     return .{ .symbol = entropy, .dataset = size * ceil(entropy) };
 }
