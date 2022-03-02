@@ -69,9 +69,9 @@ pub fn displayShannonEntropy(entropy: ShannonEntropy) !void {
     const stdout = std.io.getStdOut().writer();
 
     const str1 = bold ++ green ++ "Shannon entropy: " ++ reset;
-    const str2 = bold ++ yellow ++ "{d:.2}" ++ reset;
+    const str2 = bold ++ yellow ++ "{d:.4}" ++ reset;
     const str3 = bold ++ blue ++ " bits " ++ reset;
-    const str4 = bold ++ yellow ++ "{d:.2}" ++ reset;
+    const str4 = bold ++ yellow ++ "{d:.4}" ++ reset;
     const str5 = bold ++ blue ++ " bits" ++ reset ++ "\n";
     const template = str1 ++ str2 ++ str3 ++ str4 ++ str5;
 
