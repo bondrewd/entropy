@@ -10,7 +10,6 @@ pub const ArgumentParser = argparse.ArgumentParser(.{
             .name = "shannon",
             .long = "--shannon",
             .description = "Calculate shannon entropy",
-            .default = &.{"true"},
         },
     },
     .{
