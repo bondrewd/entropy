@@ -18,7 +18,7 @@ pub fn main() anyerror!void {
     var allocator = arena.allocator();
 
     // Get Arguments
-    var args = try ArgumentParser.parseArgumentsAllocator(allocator);
+    var args = ArgumentParser.parseArgumentsAllocator(allocator) catch return;
 
     // Validate args
     if (args.file.len == 0 and args.string.len == 0) return input_error();
