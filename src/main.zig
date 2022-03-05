@@ -22,7 +22,6 @@ pub fn main() anyerror!void {
 
     // Validate args
     if (args.file.len == 0 and args.string.len == 0) return input_error();
-    if (args.file.len != 0 and args.string.len != 0) return input_error();
 
     // Calculate entropy
     if (args.shannon) {

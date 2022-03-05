@@ -20,6 +20,7 @@ pub const ArgumentParser = argparse.ArgumentParser(.{
             .metavar = "FILE",
             .description = "Input file",
             .takes = 1,
+            .conflicts_with = &.{"string"},
         },
     },
     .{
@@ -28,7 +29,7 @@ pub const ArgumentParser = argparse.ArgumentParser(.{
             .short = "-s",
             .long = "--string",
             .metavar = "S",
-            .description = "String",
+            .description = "Input string",
             .takes = 1,
         },
     },
