@@ -19,6 +19,7 @@ pub fn main() anyerror!void {
 
     // Get Arguments
     var args = ArgumentParser.parseArgumentsAllocator(allocator) catch return;
+    defer ArgumentParser.deinitArgs(args);
 
     // Validate args
     if (args.file.len == 0 and args.string.len == 0) return input_error();
