@@ -65,10 +65,14 @@ pub fn displayShannonEntropy(entropy: ShannonEntropy) !void {
 
     const str1 = bold ++ green ++ "Shannon entropy: " ++ reset;
     const str2 = bold ++ yellow ++ "{d:.4}" ++ reset;
-    const str3 = bold ++ blue ++ " bits " ++ reset;
+    const str3 = bold ++ blue ++ " bit/char " ++ reset;
     const str4 = bold ++ yellow ++ "{d:.0}" ++ reset;
-    const str5 = bold ++ blue ++ " bits" ++ reset ++ "\n";
-    const template = str1 ++ str2 ++ str3 ++ str4 ++ str5;
+    const str5 = bold ++ blue ++ " bits " ++ reset;
+    const str6 = bold ++ yellow ++ "{d:.0}" ++ reset;
+    const str7 = bold ++ blue ++ " B " ++ reset;
+    const str8 = bold ++ yellow ++ "{d:.0}" ++ reset;
+    const str9 = bold ++ blue ++ " KB" ++ reset ++ "\n";
+    const template = str1 ++ str2 ++ str3 ++ str4 ++ str5 ++ str6 ++ str7 ++ str8 ++ str9;
 
-    try stdout.print(template, .{ entropy.symbol, entropy.dataset });
+    try stdout.print(template, .{ entropy.symbol, entropy.dataset, entropy.dataset / 8.0, @ceil(entropy.dataset / 8000.0) });
 }
