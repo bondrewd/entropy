@@ -1,9 +1,11 @@
 // Libraries
 const std = @import("std");
 const shannon = @import("shannon.zig");
+
 // Types
 const ShannonEntropy = shannon.ShannonEntropy;
 const ArgumentParser = @import("argument_parser.zig").ArgumentParser;
+
 // Functions
 const input_error = @import("error.zig").input_error;
 const open_file_error = @import("error.zig").open_file_error;
